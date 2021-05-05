@@ -6,15 +6,20 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Input from '@material-ui/core/Input';
+import clsx from 'clsx';
 
 import DashboardButton from '../DashboardButton/DashboardButton';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '15vw',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
+    margin: {
+        margin: theme.spacing(1)
+    },
+    textfield: {
+        width: '80ch',
     },
 }));
 
@@ -23,16 +28,21 @@ function ManageOwners() {
 
     const [newOwner, setNewOwner] = useState();
 
+    const handleOwner = (event) => {
+        setNewOwner(event.target.value)
+    }
+
     return (
         <div className="InputNewOwner">
 
             <h2 className="dashboardTitle">Manage Owners</h2><br />
-            <FormControl fullWidth className={classes.margin}>
-                <InputLabel htmlFor="standard-adornment">New Owner Name</InputLabel>
-                <Input
+            <FormControl className={classes.margin}>
+                <TextField 
                     id="new-owner-name"
+                    label="New Owner Name"
+                    className={clsx(classes.textfield)}
                     value={newOwner}
-                    onChange={setNewOwner}
+                    onChange={handleOwner}
                 />
             </FormControl>
             <DashboardButton />
