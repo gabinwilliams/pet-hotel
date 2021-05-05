@@ -8,11 +8,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
     table: {
         minWidth: 600,
     },
+    row: {
+        fontWeight: 'bold'
+    }
 });
 
 function createData(name, numberOfPets) {
@@ -30,7 +34,7 @@ export default function BasicTable() {
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
-            <TableHead>
+            <TableHead className={classes.row}>
                 <TableRow>
                     <TableCell align="center">Name</TableCell>
                     <TableCell align="center">Number of Pets</TableCell>
@@ -45,6 +49,7 @@ export default function BasicTable() {
                     <TableCell align="center"><Button variant="contained" color="secondary">Delete</Button></TableCell>
                 </TableRow>
                 ))}
+                <TableRow><TableCell></TableCell></TableRow>
             </TableBody>
             </Table>
         </TableContainer>
