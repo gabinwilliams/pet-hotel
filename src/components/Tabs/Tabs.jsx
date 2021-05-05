@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Dashboard from '../Dashboard/Dashboard';
 
+import ManageOwners from '../ManageOwners/ManageOwners';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -87,7 +89,7 @@ export default function FullWidthTabs() {
           <Dashboard />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <ManageOwners />
         </TabPanel>
         {/* <TabPanel value={value} index={2} dir={theme.direction}>
           Item Three
