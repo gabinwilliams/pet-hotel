@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,13 +11,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons() {
+export default function ContainedButtons(props) {
   const classes = useStyles();
+
+
 
   return (
     <div className={classes.root}>
       
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary"
+      onClick={props.handleSendPet}
+      >
         Submit
       </Button>
       

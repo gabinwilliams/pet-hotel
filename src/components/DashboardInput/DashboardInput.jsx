@@ -35,6 +35,7 @@ export default function BasicTextFields() {
 
 // Function to send off the pet to the pets table with owner attached
   const handleSendPet = () => {
+      console.log('clicked Submit');
 
   }
 
@@ -46,7 +47,8 @@ export default function BasicTextFields() {
       <form className={classes.root} noValidate autoComplete="off">
         <TextField 
         id="standard-basic" 
-        label="Pet Name" 
+        label="Pet Name"
+        value={name} 
         onChange={handleName}
         />
 
@@ -54,6 +56,7 @@ export default function BasicTextFields() {
         <TextField 
         id="standard-basic" 
         label="Pet Color" 
+        value={color}
         onChange={handleColor}
         />
 
@@ -61,13 +64,14 @@ export default function BasicTextFields() {
         <TextField 
         id="standard-basic" 
         label="Pet Breed" 
+        value={breed}
         onChange={handleBreed}
         />
 
 
       </form>
       <DashboardSelect />
-      <DashboardButton />
+      <DashboardButton handleSendPet={handleSendPet} />
     </div>
   );
 }
