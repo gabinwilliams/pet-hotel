@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2 className="dashboardTitle">Add Owner</h2>
+      <h2 className="dashboardTitle">Add Pet</h2>
       <DashboardInput />
     </div>
   )
