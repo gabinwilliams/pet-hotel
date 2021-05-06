@@ -4,10 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import DashboardButton from '../DashboardButton/DashboardButton';
 import DashboardSelect from '../DashboardSelect/DashboardSelect';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import swal from 'sweetalert';
+
 import './DashboardInput.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -61,9 +59,11 @@ export default function BasicTextFields() {
       name: name,
       color: color,
       breed: breed,
-      
+      owner_id: ownerId,
     }
     dispatch({type:'ADD_PETS', payload:petObj})
+
+    swal("Success!", "Pet added!", "success");
   }
 
 
