@@ -48,14 +48,14 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {pets.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.owner_id}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.owner}
               </TableCell>
               <TableCell align="right">{row.pet}</TableCell>
               <TableCell align="right">{row.breed}</TableCell>
               <TableCell align="right">{row.color}</TableCell>
-              <TableCell align="right">{row.checked_in}</TableCell>
+              <TableCell align="right">{String(row.are_checked_in)}</TableCell>
               <TableCell align="right"><button>Delete</button></TableCell>
             </TableRow>
           ))}
