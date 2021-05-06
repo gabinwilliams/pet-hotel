@@ -16,6 +16,7 @@ function* rootSaga(){
   yield takeEvery('FETCH_PETS', fetchPets);
   yield takeEvery('ADD_PETS', addPet);
   yield takeEvery('ADD_OWNER', addOwner);
+  yield takeEvery('DELETE_OWNER', deleteOwner);
 }
 // questions provided on each page
 function* fetchOwners(){
@@ -66,6 +67,18 @@ function* addOwner(action){
         //     }).catch( error => {
         //         console.log( 'error in addNewOwner POST', error);
         //     })
+}
+
+function* deleteOwner(action){
+  console.log( 'in deleteOwner generator', action.payload)
+
+  try {
+    const deletedOwner = yield axios.delete('/api/owner/' + action.payload.ownerID)
+    console.log('in delete')
+  }
+  catch(error){
+    console.log('error in deleteOwner generator:', error )
+  }
 }
 
 const sagaMiddleware = createSagaMiddleware();

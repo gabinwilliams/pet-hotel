@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,8 +23,20 @@ const useStyles = makeStyles({
 
 export default function BasicTable() {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const owners = useSelector( store => store.owners )
+
+    console.log('owners', owners )
+
+    const deleteOwner = ( ownerId ) => {
+
+        let ownerToDelete = {
+            ownerID: ownerId
+        }
+
+        dispatch({type:'DELETE_OWNER', payload: ownerToDelete });
+    }
 
     return (
         <div>
@@ -42,7 +54,7 @@ export default function BasicTable() {
                 <TableRow key={i}>
                     <TableCell align="center">{owner.owner}</TableCell>
                     <TableCell align="center">{owner.count}</TableCell>
-                    <TableCell align="center"><Button variant="contained" color="secondary">Delete</Button></TableCell>
+                    <TableCell align="center"><Button onClick={ (event) => deleteOwner(owner.id)}variant="contained" color="secondary">Delete</Button></TableCell>
                 </TableRow>
                 ))}
                 <TableRow><TableCell></TableCell></TableRow>
