@@ -11,6 +11,7 @@ import '../DashboardInput/DashboardInput.css'
 
 import OwnerTable from '../OwnerTable/OwnerTable';
 import DashboardButton from '../DashboardButton/DashboardButton';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,6 +35,20 @@ function ManageOwners() {
         setNewOwner(event.target.value)
     }
 
+    const addNewOwner = () => {
+
+        let ownerToPost = {
+            owner: newOwner,
+        }
+
+        axios.post('/api/owner', ownerToPost )
+            .then( ( response )=>{
+                alert('Success! New Owner Added!');
+            }).catch( error => {
+                console.log( 'error in addNewOwner POST', error);
+            })
+    }
+
     return (
         <div>
             <h2 className="dashboardTitle">Manage Owners</h2>
@@ -49,6 +64,7 @@ function ManageOwners() {
                 </FormControl>
 
                 <div>
+                    <button onClick={ (event) => addNewOwner() }>Submit</button>
                     <DashboardButton />
                 </div>
             </div>
