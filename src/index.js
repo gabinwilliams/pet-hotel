@@ -9,6 +9,7 @@ import { applyMiddleware } from "redux";
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put, take} from 'redux-saga/effects';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
 
 
 function* rootSaga(){
@@ -44,6 +45,7 @@ function* addPet(action){
   try {
     const newPet= yield axios.post('/api/pets', action.payload)
     console.log('in POST')
+    yield put({type:'FETCH_PETS'})
   }
   catch{
     console.log('error in post')
