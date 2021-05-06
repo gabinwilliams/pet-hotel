@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {useDispatch, useSelector} from 'react-redux';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -17,10 +18,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleSelect() {
   const classes = useStyles();
-  const [owner, setOwner] = React.useState('');
+  const [tempOwner, setTempOwner] = React.useState('');
+
+  const owners = useSelector((store) => store.owners);
+
 
   const handleChange = (event) => {
-    setOwner(event.target.value);
+    setTempOwner(event.target.value);
   };
 
   return (
@@ -30,12 +34,16 @@ export default function SimpleSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={owner}
+          value={tempOwner}
           onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+
+        > {owners.map((owner => (
+          
+          <MenuItem value={owner.count}>{owner.owner}</MenuItem>
+          )))}
+          {/* // <MenuItem value={10}>Ten</MenuItem>
+          // <MenuItem value={20}>Twenty</MenuItem>
+          // <MenuItem value={30}>Thirty</MenuItem> */}
         </Select>
       </FormControl>
      
