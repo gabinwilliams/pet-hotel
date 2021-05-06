@@ -8,10 +8,15 @@ import {useDispatch} from 'react-redux';
 
 const Dashboard = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
+  const getDispatch=()=>{
+    dispatch({type:'FETCH_PETS'});
+    dispatch({type:'FETCH_OWNER'});
+  }
 
   useEffect(()=>{
-    dispatch({type:'FETCH_OWNER'});
+    getDispatch()
   }, []);
 
   return (

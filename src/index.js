@@ -53,7 +53,7 @@ const owners = (state= [], action) =>{
 const pets = (state= [], action)=>{
   switch(action.type){
     case 'SET_PETS':
-      return action.payloqad
+      return action.payload
     default:
       return state;
   }
