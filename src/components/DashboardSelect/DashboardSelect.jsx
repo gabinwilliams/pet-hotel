@@ -40,7 +40,7 @@ export default function SimpleSelect(props) {
 
         > {owners.map((owner => (
           
-          <MenuItem value={owner.count}>{owner.owner}</MenuItem>
+          <MenuItem value={owner.id}>{owner.owner}</MenuItem>
           )))}
           
         </Select>
