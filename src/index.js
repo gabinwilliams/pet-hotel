@@ -13,7 +13,8 @@ import axios from 'axios';
 
 function* rootSaga(){
   yield takeEvery('FETCH_OWNER', fetchOwners);
-  yield takeEvery('FETCH_PETS', fetchPets)
+  yield takeEvery('FETCH_PETS', fetchPets);
+  yield takeEvery('ADD_PETS', addPet)
 }
 // questions provided on each page
 function* fetchOwners(){
@@ -35,6 +36,16 @@ function* fetchPets(){
   }
   catch{
     console.log('get pets error')
+  }
+}
+
+function* addPet(action){
+  try {
+    const newPet= yield axios.post('/api/pets', action.payload)
+    console.log('in POST')
+  }
+  catch{
+    console.log('error in post')
   }
 }
 
