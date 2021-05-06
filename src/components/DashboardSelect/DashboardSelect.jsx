@@ -16,15 +16,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleSelect() {
+export default function SimpleSelect(props) {
   const classes = useStyles();
-  const [tempOwner, setTempOwner] = React.useState('');
+  
 
   const owners = useSelector((store) => store.owners);
 
 
   const handleChange = (event) => {
-    setTempOwner(event.target.value);
+    props.setOwnerId(event.target.value);
+    console.log('This is the owner ID:', props.ownerId);
   };
 
   return (
@@ -34,16 +35,14 @@ export default function SimpleSelect() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={tempOwner}
+          value={props.ownerId}
           onChange={handleChange}
 
         > {owners.map((owner => (
           
           <MenuItem value={owner.count}>{owner.owner}</MenuItem>
           )))}
-          {/* // <MenuItem value={10}>Ten</MenuItem>
-          // <MenuItem value={20}>Twenty</MenuItem>
-          // <MenuItem value={30}>Thirty</MenuItem> */}
+          
         </Select>
       </FormControl>
      

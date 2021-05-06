@@ -4,6 +4,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import DashboardButton from '../DashboardButton/DashboardButton';
 import DashboardSelect from '../DashboardSelect/DashboardSelect';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import './DashboardInput.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -12,6 +16,13 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '15vw',
     },
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -22,7 +33,9 @@ export default function BasicTextFields() {
   const [color, setColor] = useState('');
   const [breed, setBreed] = useState('');
   const [owner, setOwner] = useState('');
+  const [ownerId, setOwnerId] = React.useState('');
 
+  const owners = useSelector((store) => store.owners);
   const pets = useSelector((store) => store.pets);
 
   const handleName = (event) => {
@@ -37,6 +50,8 @@ export default function BasicTextFields() {
     setBreed(event.target.value)
   }
 
+ 
+
 // Function to send off the pet to the pets table with owner attached
   const handleSendPet = () => {
       console.log('clicked Submit');
@@ -48,7 +63,6 @@ export default function BasicTextFields() {
       
     }
   }
-
 
 
   return (
@@ -77,10 +91,8 @@ export default function BasicTextFields() {
         value={breed}
         onChange={handleBreed}
         />
-
-
       </form>
-      <DashboardSelect />
+      <DashboardSelect ownerId={ownerId} setOwnerId={setOwnerId}/>
       <DashboardButton handleSendPet={handleSendPet} />
     </div>
   );
