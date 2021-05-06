@@ -31,7 +31,7 @@ export default function BasicTextFields() {
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
   const [breed, setBreed] = useState('');
-  const [owner, setOwner] = useState('');
+  // const [owner, setOwner] = useState('');
   const [ownerId, setOwnerId] = React.useState('');
 
   const owners = useSelector((store) => store.owners);
@@ -55,6 +55,11 @@ export default function BasicTextFields() {
   const handleSendPet = () => {
       console.log('clicked Submit');
     
+    if(name == '' || color == '' || breed == '' || ownerId == '') {
+      swal("Oops!", "Please fill out all text fields to add a pet", "warning");
+      return 
+    }else {
+
     let petObj = {
       name: name,
       color: color,
@@ -67,8 +72,14 @@ export default function BasicTextFields() {
 
     dispatch({type: 'FETCH_PETS'})
     swal("Success!", "Pet added!", "success");
+
+    setName('');
+    setColor('');
+    setBreed('');
+    setOwnerId('');
   }
 
+}
 
   return (
 
