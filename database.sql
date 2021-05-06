@@ -10,5 +10,6 @@ CREATE TABLE "pets"(
 "owner_id" int REFERENCES owners,
 "breed" VARCHAR,
 "color" VARCHAR,
+"name" VARCHAR,
 "checked_in" DATE
 );

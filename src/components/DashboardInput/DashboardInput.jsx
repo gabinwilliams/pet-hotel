@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {useDispatch, useSelector} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import DashboardButton from '../DashboardButton/DashboardButton';
 import DashboardSelect from '../DashboardSelect/DashboardSelect';
@@ -20,6 +21,9 @@ export default function BasicTextFields() {
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
   const [breed, setBreed] = useState('');
+  const [owner, setOwner] = useState('');
+
+  const pets = useSelector((store) => store.pets);
 
   const handleName = (event) => {
     setName(event.target.value)
@@ -37,6 +41,12 @@ export default function BasicTextFields() {
   const handleSendPet = () => {
       console.log('clicked Submit');
 
+    let petObj = {
+      name: name,
+      color: color,
+      breed: breed,
+      
+    }
   }
 
 
