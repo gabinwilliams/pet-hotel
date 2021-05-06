@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -27,11 +28,15 @@ const rows = [
     createData('Chris', 2),
     createData('Ally',  1),
     createData('Dane',  3),
+    createData('Alex', 1)
 ];
 export default function BasicTable() {
     const classes = useStyles();
 
+    const owners = useSelector( store => store.owners )
+
     return (
+        <>
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
             <TableHead className={classes.row}>
@@ -42,10 +47,10 @@ export default function BasicTable() {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {rows.map((row, i) => (
+                {owners.map((owner, i) => (
                 <TableRow key={i}>
-                    <TableCell align="center">{row.name}</TableCell>
-                    <TableCell align="center">{row.numberOfPets}</TableCell>
+                    <TableCell align="center">{owner.owner}</TableCell>
+                    <TableCell align="center">{owner.count}</TableCell>
                     <TableCell align="center"><Button variant="contained" color="secondary">Delete</Button></TableCell>
                 </TableRow>
                 ))}
@@ -53,5 +58,6 @@ export default function BasicTable() {
             </TableBody>
             </Table>
         </TableContainer>
+        </>
     );
 }
