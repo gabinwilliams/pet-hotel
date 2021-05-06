@@ -14,7 +14,8 @@ import axios from 'axios';
 function* rootSaga(){
   yield takeEvery('FETCH_OWNER', fetchOwners);
   yield takeEvery('FETCH_PETS', fetchPets);
-  yield takeEvery('ADD_PETS', addPet)
+  yield takeEvery('ADD_PETS', addPet);
+  yield takeEvery('ADD_OWNER', addOwner);
 }
 // questions provided on each page
 function* fetchOwners(){
@@ -47,6 +48,24 @@ function* addPet(action){
   catch{
     console.log('error in post')
   }
+}
+
+function* addOwner(action){
+  console.log('in add owner', action.payload)
+
+  try {
+    const newOwner= yield axios.post('/api/owner', action.payload)
+  }
+  catch(error){
+    console.log('add to favorite error', error)
+  }
+  
+  // axios.post('/api/owner', ownerToPost )
+        //     .then( ( response )=>{
+        //         alert('Success! New Owner Added!');
+        //     }).catch( error => {
+        //         console.log( 'error in addNewOwner POST', error);
+        //     })
 }
 
 const sagaMiddleware = createSagaMiddleware();
