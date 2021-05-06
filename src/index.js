@@ -13,6 +13,7 @@ import axios from 'axios';
 
 function* rootSaga(){
   yield takeEvery('FETCH_OWNER', fetchOwners);
+  yield takeEvery('FETCH_PETS', fetchPets)
 }
 // questions provided on each page
 function* fetchOwners(){
@@ -23,6 +24,17 @@ function* fetchOwners(){
   }
   catch{
     console.log('get owners error')
+  }
+}
+
+function* fetchPets(){
+  try {
+    const pets = yield axios.get('/api/pets')
+    console.log ('get pets', pets.data)
+    yield put ({type: 'SET_PETS', payload: pets.data})
+  }
+  catch{
+    console.log('get pets error')
   }
 }
 
@@ -38,9 +50,19 @@ const owners = (state= [], action) =>{
   }
 }
 
+const pets = (state= [], action)=>{
+  switch(action.type){
+    case 'SET_PETS':
+      return action.payloqad
+    default:
+      return state;
+  }
+}
+
 const store = createStore(
   combineReducers({
     owners,
+    pets,
   }),
   applyMiddleware(sagaMiddleware, logger)
 );
