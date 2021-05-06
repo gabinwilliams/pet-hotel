@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {useDispatch, useSelector} from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -29,31 +30,33 @@ const rows = [
 
 export default function BasicTable() {
   const classes = useStyles();
-
+  const pets = useSelector((store) => store.pets);
+  
+  
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            <TableCell align="right">Actions&nbsp;(g)</TableCell>
+            <TableCell>Owner</TableCell>
+            <TableCell align="right">Pet</TableCell>
+            <TableCell align="right">Breed</TableCell>
+            <TableCell align="right">Color</TableCell>
+            <TableCell align="right">Checked in</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {pets.map((row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.pet}</TableCell>
+              <TableCell align="right">{row.breed}</TableCell>
+              <TableCell align="right">{row.color}</TableCell>
+              <TableCell align="right">{row.checked_in}</TableCell>
+              <TableCell align="right"><button>Delete</button></TableCell>
             </TableRow>
           ))}
         </TableBody>
