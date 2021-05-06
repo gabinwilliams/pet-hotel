@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BasicTextFields() {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [color, setColor] = useState('');
@@ -62,6 +63,7 @@ export default function BasicTextFields() {
       breed: breed,
       
     }
+    dispatch({type:'ADD_PETS', payload:petObj})
   }
 
 

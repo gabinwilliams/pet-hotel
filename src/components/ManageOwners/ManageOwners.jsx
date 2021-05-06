@@ -5,8 +5,10 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import {useDispatch} from 'react-redux';
 import Input from '@material-ui/core/Input';
 import clsx from 'clsx';
+import Button from '@material-ui/core/Button'
 import '../DashboardInput/DashboardInput.css'
 
 import OwnerTable from '../OwnerTable/OwnerTable';
@@ -28,25 +30,22 @@ const useStyles = makeStyles((theme) => ({
 
 function ManageOwners() {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
-    const [newOwner, setNewOwner] = useState();
+    const [newOwner, setNewOwner] = useState('');
 
     const handleOwner = (event) => {
         setNewOwner(event.target.value)
     }
 
     const addNewOwner = () => {
+        console.log('in add new')
 
         let ownerToPost = {
             owner: newOwner,
         }
 
-        axios.post('/api/owner', ownerToPost )
-            .then( ( response )=>{
-                alert('Success! New Owner Added!');
-            }).catch( error => {
-                console.log( 'error in addNewOwner POST', error);
-            })
+        dispatch({type:'ADD_OWNER', payload: ownerToPost});
     }
 
     return (
@@ -64,8 +63,8 @@ function ManageOwners() {
                 </FormControl>
 
                 <div>
-                    <button onClick={ (event) => addNewOwner() }>Submit</button>
-                    <DashboardButton />
+                    <Button variant="contained" color="primary" onClick={ (event) => addNewOwner() }>Submit</Button>
+                    {/* <DashboardButton /> */}
                 </div>
             </div>
             <OwnerTable />
