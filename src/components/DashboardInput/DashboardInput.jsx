@@ -54,15 +54,18 @@ export default function BasicTextFields() {
 // Function to send off the pet to the pets table with owner attached
   const handleSendPet = () => {
       console.log('clicked Submit');
-
+    
     let petObj = {
       name: name,
       color: color,
       breed: breed,
       owner_id: ownerId,
     }
+
+    console.log('This is obj to send', petObj);
     dispatch({type:'ADD_PETS', payload:petObj})
 
+    dispatch({type: 'FETCH_PETS'})
     swal("Success!", "Pet added!", "success");
   }
 
