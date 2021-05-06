@@ -20,23 +20,14 @@ const useStyles = makeStyles({
     }
 });
 
-function createData(name, numberOfPets) {
-    return { name, numberOfPets};
-}
 
-const rows = [
-    createData('Chris', 2),
-    createData('Ally',  1),
-    createData('Dane',  3),
-    createData('Alex', 1)
-];
 export default function BasicTable() {
     const classes = useStyles();
 
     const owners = useSelector( store => store.owners )
 
     return (
-        <>
+        <div>
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
             <TableHead className={classes.row}>
@@ -58,6 +49,6 @@ export default function BasicTable() {
             </TableBody>
             </Table>
         </TableContainer>
-        </>
+        </div>
     );
 }
