@@ -9,6 +9,7 @@ import { applyMiddleware } from "redux";
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put, take, call} from 'redux-saga/effects';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
 
 
 function* rootSaga(){
@@ -17,6 +18,7 @@ function* rootSaga(){
   yield takeEvery('ADD_PETS', addPet);
   yield takeEvery('ADD_OWNER', addOwner);
   yield takeEvery('DELETE_OWNER', deleteOwner);
+  yield takeEvery('DELETE_PET', deletePet);
 }
 // questions provided on each page
 function* fetchOwners(){
@@ -45,6 +47,7 @@ function* addPet(action){
   try {
     const newPet= yield axios.post('/api/pets', action.payload)
     console.log('in POST')
+    yield put({type:'FETCH_PETS'})
   }
   catch{
     console.log('error in post')
@@ -73,15 +76,32 @@ function* deleteOwner(action){
   console.log( 'in deleteOwner generator', action.payload)
 
   try {
-    const uri = `/api/owner/${action.payload.ownerID}`;
-    const deleteThisOwner = yield call(axios.delete, uri);
-    yield put({ type: 'FETCH_OWNER'});
-    alert('deletOwner generator successfully!');
+
+//     const uri = `/api/owner/${action.payload.ownerID}`;
+//     const deleteThisOwner = yield call(axios.delete, uri);
+//     yield put({ type: 'FETCH_OWNER'});
+//     alert('deletOwner generator successfully!');
     // const deletedOwner = yield axios.delete('/api/owner/', {data:action.payload.ownerID})
     // console.log('in delete')
+    const deletedOwner = yield axios.delete('/api/owner/' + action.payload.ownerID)
+    console.log('in delete')
+    yield put ({type: 'FETCH_OWNERS'})
+
   }
   catch(error){
     console.log('error in deleteOwner generator:', error )
+  }
+}
+
+function* deletePet(action) {
+  console.log('in deletePet generator', action.payload);
+
+  try {
+    const deletePet = yield axios.delete('/api/pets' + action.payload.id)
+
+    yield put({type:'FETCH_PETS'})
+  }catch(error) {
+    console.log('error in deletePet saga:', error);
   }
 }
 

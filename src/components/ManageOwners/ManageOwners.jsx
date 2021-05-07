@@ -62,7 +62,7 @@ function ManageOwners() {
                 </FormControl>
 
                 <div>
-                    <Button variant="contained" color="primary" onClick={ (event) => addNewOwner() }>Submit</Button>
+                    <Button size="small" variant="contained" color="primary" onClick={ (event) => addNewOwner() }>Submit</Button>
                     {/* <DashboardButton /> */}
                 </div>
             </div>

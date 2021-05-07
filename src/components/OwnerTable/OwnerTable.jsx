@@ -9,7 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import clsx from 'clsx';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+// import clsx from 'clsx';
 
 const useStyles = makeStyles({
     table: {
@@ -54,7 +56,12 @@ export default function BasicTable() {
                 <TableRow key={i}>
                     <TableCell align="center">{owner.owner}</TableCell>
                     <TableCell align="center">{owner.count}</TableCell>
-                    <TableCell align="center"><Button onClick={ (event) => deleteOwner(owner.id)}variant="contained" color="secondary">Delete</Button></TableCell>
+                    <TableCell align="center">
+                    <IconButton oonClick={ (event) => deleteOwner(owner.id)}variant="contained" size="small" color="secondary">
+                        <DeleteIcon></DeleteIcon>
+                    </IconButton>
+                    
+                    </TableCell>
                 </TableRow>
                 ))}
                 <TableRow><TableCell></TableCell></TableRow>
