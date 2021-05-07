@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put, take} from 'redux-saga/effects';
+import { takeEvery, put, take, call} from 'redux-saga/effects';
 import axios from 'axios';
 
 
@@ -73,8 +73,12 @@ function* deleteOwner(action){
   console.log( 'in deleteOwner generator', action.payload)
 
   try {
-    const deletedOwner = yield axios.delete('/api/owner/' + action.payload.ownerID)
-    console.log('in delete')
+    const uri = `/api/owner/${action.payload.ownerID}`;
+    const deleteThisOwner = yield call(axios.delete, uri);
+    yield put({ type: 'FETCH_OWNER'});
+    alert('deletOwner generator successfully!');
+    // const deletedOwner = yield axios.delete('/api/owner/', {data:action.payload.ownerID})
+    // console.log('in delete')
   }
   catch(error){
     console.log('error in deleteOwner generator:', error )
