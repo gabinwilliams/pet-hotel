@@ -57,7 +57,7 @@ export default function BasicTable() {
                     <TableCell align="center">{owner.owner}</TableCell>
                     <TableCell align="center">{owner.count}</TableCell>
                     <TableCell align="center">
-                    <IconButton oonClick={ (event) => deleteOwner(owner.id)}variant="contained" size="small" color="secondary">
+                    <IconButton onClick={ (event) => deleteOwner(owner.id)}variant="contained" size="small" color="secondary">
                         <DeleteIcon></DeleteIcon>
                     </IconButton>
                     

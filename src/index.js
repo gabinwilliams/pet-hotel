@@ -89,7 +89,7 @@ function* deletePet(action) {
   console.log('in deletePet generator', action.payload);
 
   try {
-    const deletePet = yield axios.delete('/api/pets' + action.payload.id)
+    const deletePet = yield axios.delete('/api/pets/' + action.payload.id)
 
     yield put({type:'FETCH_PETS'})
   }catch(error) {
