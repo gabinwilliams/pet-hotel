@@ -29,8 +29,19 @@ const rows = [
 ];
 
 export default function BasicTable() {
+
   const classes = useStyles();
+  const dispatch = useDispatch();
   const pets = useSelector((store) => store.pets);
+
+  const deletePet = (id) => {
+    console.log('pet to delete:', id);
+    let petToDelete = {
+        id: id
+    }
+
+    // dispatch({type:'DELETE_PET', payload: petToDelete });
+}
   
   
   return (
@@ -47,16 +58,16 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {pets.map((row) => (
-            <TableRow key={row.owner_id}>
+          {pets.map((pet) => (
+            <TableRow key={pet.owner_id}>
               <TableCell component="th" scope="row">
-                {row.owner}
+                {pet.owner}
               </TableCell>
-              <TableCell align="right">{row.pet}</TableCell>
-              <TableCell align="right">{row.breed}</TableCell>
-              <TableCell align="right">{row.color}</TableCell>
-              <TableCell align="right">{String(row.are_checked_in)}</TableCell>
-              <TableCell align="right"><button>Delete</button></TableCell>
+              <TableCell align="right">{pet.name}</TableCell>
+              <TableCell align="right">{pet.breed}</TableCell>
+              <TableCell align="right">{pet.color}</TableCell>
+              <TableCell align="right">{String(pet.are_checked_in)}</TableCell>
+              <TableCell align="right"><button onClick={() => deletePet(pet.id)}>Delete</button></TableCell>
             </TableRow>
           ))}
         </TableBody>

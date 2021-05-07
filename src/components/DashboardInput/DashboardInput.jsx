@@ -55,7 +55,7 @@ export default function BasicTextFields() {
   const handleSendPet = () => {
       console.log('clicked Submit');
     
-    if(name == '' || color == '' || breed == '' || ownerId == '') {
+    if(name === '' || color === '' || breed === '' || ownerId === '') {
       swal("Oops!", "Please fill out all text fields to add a pet", "warning");
       return 
     }else {
