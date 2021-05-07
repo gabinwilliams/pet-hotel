@@ -8,6 +8,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   table: {
@@ -29,8 +32,19 @@ const rows = [
 ];
 
 export default function BasicTable() {
+
   const classes = useStyles();
+  const dispatch = useDispatch();
   const pets = useSelector((store) => store.pets);
+
+  const deletePet = (id) => {
+    console.log('pet to delete:', id);
+    let petToDelete = {
+        id: id
+    }
+
+    // dispatch({type:'DELETE_PET', payload: petToDelete });
+}
   
   
   return (
@@ -39,24 +53,28 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>Owner</TableCell>
-            <TableCell align="right">Pet</TableCell>
-            <TableCell align="right">Breed</TableCell>
-            <TableCell align="right">Color</TableCell>
-            <TableCell align="right">Checked in</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell align="center">Pet</TableCell>
+            <TableCell align="center">Breed</TableCell>
+            <TableCell align="center">Color</TableCell>
+            <TableCell align="center">Checked in</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {pets.map((row) => (
-            <TableRow key={row.owner_id}>
+          {pets.map((pet) => (
+            <TableRow key={pet.owner_id}>
               <TableCell component="th" scope="row">
-                {row.owner}
+                {pet.owner}
               </TableCell>
-              <TableCell align="right">{row.pet}</TableCell>
-              <TableCell align="right">{row.breed}</TableCell>
-              <TableCell align="right">{row.color}</TableCell>
-              <TableCell align="right">{String(row.are_checked_in)}</TableCell>
-              <TableCell align="right"><button>Delete</button></TableCell>
+              <TableCell align="center">{pet.name}</TableCell>
+              <TableCell align="center">{pet.breed}</TableCell>
+              <TableCell align="center">{pet.color}</TableCell>
+              <TableCell align="center">{String(pet.are_checked_in)}</TableCell>
+              <TableCell align="center">
+                <IconButton onClick={() => deletePet(pet.id)}variant="contained" size="small" color="secondary">
+                  <DeleteIcon></DeleteIcon>
+                </IconButton>
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>
