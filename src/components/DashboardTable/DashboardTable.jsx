@@ -8,6 +8,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   table: {
@@ -50,11 +53,11 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>Owner</TableCell>
-            <TableCell align="right">Pet</TableCell>
-            <TableCell align="right">Breed</TableCell>
-            <TableCell align="right">Color</TableCell>
-            <TableCell align="right">Checked in</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell align="center">Pet</TableCell>
+            <TableCell align="center">Breed</TableCell>
+            <TableCell align="center">Color</TableCell>
+            <TableCell align="center">Checked in</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -63,11 +66,15 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {pet.owner}
               </TableCell>
-              <TableCell align="right">{pet.name}</TableCell>
-              <TableCell align="right">{pet.breed}</TableCell>
-              <TableCell align="right">{pet.color}</TableCell>
-              <TableCell align="right">{String(pet.are_checked_in)}</TableCell>
-              <TableCell align="right"><button onClick={() => deletePet(pet.id)}>Delete</button></TableCell>
+              <TableCell align="center">{pet.name}</TableCell>
+              <TableCell align="center">{pet.breed}</TableCell>
+              <TableCell align="center">{pet.color}</TableCell>
+              <TableCell align="center">{String(pet.are_checked_in)}</TableCell>
+              <TableCell align="center">
+                <IconButton onClick={() => deletePet(pet.id)}variant="contained" size="small" color="secondary">
+                  <DeleteIcon></DeleteIcon>
+                </IconButton>
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>
